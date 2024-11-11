@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white text-gray-800 py-6 shadow-md relative z-10">
+        <div class="container mx-auto flex justify-between items-center px-6 lg:px-10">
+            <div class="flex items-center space-x-4">
+                <!-- Logo with Left Padding -->
+                <div class="pl-4">
+                    <a href="/" class="transition duration-300">
+                        <img src="assets/Picture1.png" class="w-28 h-12 object-contain" alt="Logo">
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 px-10">
+                <a href="/" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">Home</a>
+                <a href="/about.html" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">About</a>
+                <a href="/products.html" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">Products</a>
+    
+                <!-- Dropdown for Strains -->
+                <div class="relative group">
+                    <button class="text-lg text-gray-700 hover:text-blue-500 transition duration-300 focus:outline-none flex items-center space-x-2">
+                        <span>Strains</span>
+                        <!-- Dropdown Arrow Icon -->
+                        <svg class="w-4 h-4 text-gray-700 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 hidden mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg group-hover:block z-20">
+                        <!-- Link for Bacillus Clausii -->
+                        <a href="/strains.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition duration-300">Bacillus Clausii</a>
+                    </div>
+                </div>
+    
+                <a href="/research.html" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">Research</a>
+                <a href="/contact.html" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">Contact</a>
+            </nav>
+    
+            <!-- Hamburger Icon for Mobile -->
+            <button id="hamburger" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <nav class="flex flex-col space-y-2 px-6 py-4 bg-white border-t border-gray-200 shadow-md">
+                <a href="/" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">Home</a>
+                <a href="/about.html" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">About</a>
+                <a href="/products.html" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">Products</a>
+    
+                <!-- Mobile Strains Dropdown -->
+                <div class="relative">
+                    <button id="mobile-strains-button" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300 flex items-center space-x-2">
+                        <span>Strains</span>
+                        <svg class="w-4 h-4 text-gray-800 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="mobile-strains-dropdown" class="mt-2 pl-4 hidden">
+                        <!-- Link for Bacillus Clausii -->
+                        <a href="/strains.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition duration-300">Bacillus Clausii</a>
+                    </div>
+                </div>
+    
+                <a href="/research.html" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">Research</a>
+                <a href="/contact.html" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    
+    <!-- JavaScript for Mobile Menu and Dropdown Behavior -->
+    <script>
+        // Toggle mobile menu visibility
+        document.getElementById('hamburger').addEventListener('click', function () {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    
+        // Toggle the "Strains" dropdown on mobile
+        document.getElementById('mobile-strains-button').addEventListener('click', function () {
+            const mobileDropdown = document.getElementById('mobile-strains-dropdown');
+            mobileDropdown.classList.toggle('hidden');
+        });
+    
+        // Desktop hover dropdown behavior with improved user interaction
+        const strainsButton = document.querySelector('.group > button');
+        const strainsDropdown = document.querySelector('.group > .mt-2');
+    
+        // Open the dropdown when hovering over the button
+        strainsButton.addEventListener('mouseenter', () => {
+            strainsDropdown.classList.remove('hidden');
+        });
+    
+        // Keep the dropdown open when hovering over the dropdown menu itself
+        strainsDropdown.addEventListener('mouseenter', () => {
+            strainsDropdown.classList.remove('hidden');
+        });
+    
+        // Close the dropdown when the cursor leaves both the button and the dropdown
+        strainsButton.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                if (!strainsDropdown.matches(':hover') && !strainsButton.matches(':hover')) {
+                    strainsDropdown.classList.add('hidden');
+                }
+            }, 200); // Delay closing the dropdown to allow hover transition
+        });
+    
+        strainsDropdown.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                if (!strainsDropdown.matches(':hover') && !strainsButton.matches(':hover')) {
+                    strainsDropdown.classList.add('hidden');
+                }
+            }, 200); // Delay closing the dropdown to allow hover transition
+        });
+    </script>
+    
+
+
+<main>
+    <!-- Hero Image with Overlay Text -->
+    <section class="relative w-full h-screen">
+        <img src="assets/about.jpg" alt="About Us" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="text-center text-white px-6">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Aarmed Pharmacy</h1>
+                <p class="text-lg md:text-xl max-w-xl mx-auto">
+                    Committed to enhancing lives through innovative healthcare solutions and premium products.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced About Us Section -->
+    <section class="container mx-auto px-6 py-16">
+        <div class="text-center max-w-5xl mx-auto mb-12">
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-4">About Us</h2>
+            <p class="text-lg md:text-xl text-gray-700">
+                A healthcare organization that works relentlessly to identify, customize and offer the best possible therapeutic alternatives  since 2000. Distinctly known for its portfolio of superior, clinically proven, safe and value added products from natural and non-chemical  origins. An organized player in Probiotics, Nutraceuticals, Phytopharmaceutical and Nasal Inhalations therapies for supportive and preventive Healthcare.
+            </p>
+        </div>
+
+        <!-- About Us Info with Features -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <!-- Feature 1 -->
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full shadow-md">
+                        <i class="fas fa-leaf text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">Innovative Healthcare Solutions</h3>
+                        <p class="text-gray-700">
+                            Our dedication to research and development drives us to create solutions that address both current and emerging healthcare needs.
+                        </p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 flex items-center justify-center bg-green-500 text-white rounded-full shadow-md">
+                        <i class="fas fa-capsules text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">Premium Quality Products</h3>
+                        <p class="text-gray-700">
+                            From probiotics to respiratory solutions, our products are crafted with precision, ensuring the highest standards of quality and effectiveness.
+                        </p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="flex items-start space-x-4">
+                    <div class="w-12 h-12 flex items-center justify-center bg-indigo-500 text-white rounded-full shadow-md">
+                        <i class="fas fa-hand-holding-heart text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">Customer-Centric Approach</h3>
+                        <p class="text-gray-700">
+                            At Aarmed, we prioritize the well-being of our customers, providing expert guidance and personalized care at every step.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="flex items-center justify-center">
+                <img src="assets/about-right.jpg" alt="Our Story" class="w-full h-auto object-cover rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
+            </div>
+        </div>
+    </section>
+
+<!-- Mission and Vision Section with Enhanced Style -->
+<section class="bg-gray-50 py-20">
+    <div class="container mx-auto px-6">
+        <!-- Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Our Mission & Vision</h2>
+            <p class="text-lg text-gray-600 mt-4">
+                We are dedicated to providing high-quality healthcare solutions that support wellness and empower individuals.
+            </p>
+        </div>
+
+        <!-- Mission & Vision Cards -->
+        <div class="flex flex-col md:flex-row justify-center items-center md:space-x-10 space-y-10 md:space-y-0">
+            <!-- Mission Card -->
+            <div class="flex-1 bg-white shadow-lg rounded-lg p-8 text-center transform transition duration-300 hover:scale-105" data-aos="fade-right" data-aos-delay="100">
+                <div class="flex justify-center mb-4">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                        <svg class="w-8 h-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2zm0 4c-1.104 0-2 .896-2 2v6h4v-6c0-1.104-.896-2-2-2z" />
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Our Mission</h3>
+                <p class="text-lg text-gray-600">
+                    To continuously deliver world-class heath care solutions through continuous innovation, adherence to stringent quality standards and continuous innovation.
+                </p>
+            </div>
+
+            <!-- Vision Card -->
+            <div class="flex-1 bg-white shadow-lg rounded-lg p-8 text-center transform transition duration-300 hover:scale-105" data-aos="fade-left" data-aos-delay="200">
+                <div class="flex justify-center mb-4">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="w-8 h-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2zm0 4c-1.104 0-2 .896-2 2v6h4v-6c0-1.104-.896-2-2-2z" />
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Our Vision</h3>
+                <p class="text-lg text-gray-600">
+                    To be the global pharmaceutical player recogniszd for high standards of quality & excellence.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Certificates Section -->
+<section class="bg-gray-50 py-20">
+    <div class="container mx-auto px-6">
+        <!-- Section Title -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Our Certifications & Accreditations</h2>
+            <p class="text-lg text-gray-600 mt-4">
+                We are proud to be recognized for our commitment to quality and excellence in the healthcare industry. Below are some of the key certifications and accreditations we have received.
+            </p>
+        </div>
+
+        <!-- Certificates Grid with Center Alignment -->
+        <div class="flex flex-wrap justify-center gap-10">
+            <!-- Certificate 1 -->
+            <div class="flex justify-center items-center transition transform duration-300 hover:scale-110 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                <img src="assets/certificate1.png" alt="Certification 1" class="w-full h-full max-w-xs object-contain rounded-lg shadow-md transition-transform duration-300 ease-in-out">
+            </div>
+
+            <!-- Certificate 2 -->
+            <div class="flex justify-center items-center transition transform duration-300 hover:scale-110 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                <img src="assets/certificate2.png" alt="Certification 2" class="w-full h-full max-w-xs object-contain rounded-lg shadow-md transition-transform duration-300 ease-in-out">
+            </div>
+
+            <!-- Certificate 3 -->
+            <div class="flex justify-center items-center transition transform duration-300 hover:scale-110 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                <img src="assets/certificate3.png" alt="Certification 3" class="w-full h-full max-w-xs object-contain rounded-lg shadow-md transition-transform duration-300 ease-in-out">
+            </div>
+
+            <!-- Certificate 4 -->
+            <div class="flex justify-center items-center transition transform duration-300 hover:scale-110 hover:shadow-xl" data-aos="fade-up" data-aos-delay="400">
+                <img src="assets/certificate4.png" alt="Certification 4" class="w-full h-full max-w-xs object-contain rounded-lg shadow-md transition-transform duration-300 ease-in-out">
+            </div>
+
+            <!-- Certificate 5 -->
+            <div class="flex justify-center items-center transition transform duration-300 hover:scale-110 hover:shadow-xl" data-aos="fade-up" data-aos-delay="500">
+                <img src="assets/certificate5.png" alt="Certification 5" class="w-full h-full max-w-xs object-contain rounded-lg shadow-md transition-transform duration-300 ease-in-out">
+            </div>
+        </div>
+
+        <!-- Contact Button -->
+        <div class="text-center mt-16">
+            <a href="./contact.html" class="inline-block px-8 py-3 mt-4 bg-blue-600 text-white font-semibold text-lg rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 ease-in-out">
+                Contact Us
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+</main>
+
+
+
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 lg:px-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Company Information -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Aarmed Pharmacy</h3>
+                    <p class="text-gray-400 text-sm">
+                        Providing trusted health solutions and premium probiotic products to support your wellness.
+                    </p>
+                    <div class="mt-4">
+                        <p class="text-gray-400 text-sm">© 2024 Aarmed Pharmacy. All rights reserved.</p>
+                    </div>
+                </div>
+    
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="/about.html" class="text-gray-400 hover:text-white transition duration-300">About</a></li>
+                        <li><a href="/products.html" class="text-gray-400 hover:text-white transition duration-300">Products</a></li>
+                        <li><a href="/research.html" class="text-gray-400 hover:text-white transition duration-300">Research</a></li>
+                        <li><a href="/contact.html" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Information -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400 text-sm">Phone: <a href="tel:+1234567890" class="hover:text-white">+1 234 567 890</a></li>
+                        <li class="text-gray-400 text-sm">Email: <a href="mailto:info@aarmedpharmacy.com" class="hover:text-white">info@aarmedpharmacy.com</a></li>
+                        <li class="text-gray-400 text-sm">Address: 123 Wellness St, Health City, Country</li>
+                    </ul>
+                </div>
+    
+                <!-- Social Media -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.4c-5.3 0-9.6 4.3-9.6 9.6 0 4.3 2.8 8.1 6.7 9.5v-6.7h-2v-2.7h2v-2.1c0-2.7 1.5-4.2 3.9-4.2 1.1 0 2.3 0.1 2.3 0.1v2.5h-1.3c-1.3 0-1.7 0.8-1.7 1.6v1.9h2.7l-0.5 2.7h-2.2v6.7c3.9-1.4 6.7-5.2 6.7-9.5 0-5.3-4.3-9.6-9.6-9.6z"></path></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M24 2.7c-0.9 0.4-1.8 0.7-2.7 0.8 1-0.6 1.7-1.5 2.1-2.6-1 0.6-2.1 1-3.3 1.3-1.1-1.2-2.6-2-4.3-2-3.3 0-6 2.7-6 6 0 0.5 0.1 1.1 0.2 1.6-5-0.2-9.4-2.7-12.4-6.4-0.5 0.9-0.8 1.9-0.8 3 0 2 1 3.7 2.6 4.7-0.9-0.1-1.7-0.3-2.5-0.7v0.1c0 2.9 2.1 5.3 4.9 5.8-0.5 0.1-1 0.2-1.5 0.2-0.4 0-0.9 0-1.3-0.1 0.9 2.7 3.5 4.6 6.5 4.6 7.8 0 12.1-6.5 12.1-12.1 0-0.2 0-0.3 0-0.5 0.8-0.5 1.5-1.1 2.1-1.8z"></path></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.2c-5.4 0-9.8 4.3-9.8 9.8 0 4.9 3.6 9 8.4 9.7v-6.9h-2v-2.8h2v-2.1c0-2.1 1.2-3.2 3.1-3.2 0.9 0 1.9 0.2 1.9 0.2v2.4h-1.1c-1.2 0-1.5 0.7-1.5 1.5v1.8h2.5l-0.3 2.7h-2.2v6.9c4.8-0.7 8.4-4.8 8.4-9.7 0-5.4-4.4-9.8-9.8-9.8z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Footer Bottom -->
+            <div class="mt-8 border-t border-gray-700 pt-4 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 Aarmed Pharmacy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
+</script>
+</html>

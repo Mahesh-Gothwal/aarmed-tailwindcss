@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strains</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header class="bg-white text-gray-800 py-6 shadow-md relative z-10">
+        <div class="container mx-auto flex justify-between items-center px-6 lg:px-10">
+            <div class="flex items-center space-x-4">
+                <!-- Logo with Left Padding -->
+                <div class="pl-4">
+                    <a href="/" class="transition duration-300">
+                        <img src="assets/Picture1.png" class="w-28 h-12 object-contain" alt="Logo">
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 px-10">
+                <a href="/" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">Home</a>
+                <a href="/about.html" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">About</a>
+                <a href="/products.html" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">Products</a>
+    
+                <!-- Dropdown for Strains -->
+                <div class="relative group">
+                    <button class="text-lg text-gray-700 hover:text-blue-500 transition duration-300 focus:outline-none flex items-center space-x-2">
+                        <span>Strains</span>
+                        <!-- Dropdown Arrow Icon -->
+                        <svg class="w-4 h-4 text-gray-700 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 hidden mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg group-hover:block z-20">
+                        <!-- Link for Bacillus Clausii -->
+                        <a href="/strains.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition duration-300">Bacillus Clausii</a>
+                    </div>
+                </div>
+    
+                <a href="/research.html" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">Research</a>
+                <a href="/contact.html" class="text-lg text-gray-700 hover:text-blue-500 transition duration-300">Contact</a>
+            </nav>
+    
+            <!-- Hamburger Icon for Mobile -->
+            <button id="hamburger" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <nav class="flex flex-col space-y-2 px-6 py-4 bg-white border-t border-gray-200 shadow-md">
+                <a href="/" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">Home</a>
+                <a href="/about.html" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">About</a>
+                <a href="/products.html" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">Products</a>
+    
+                <!-- Mobile Strains Dropdown -->
+                <div class="relative">
+                    <button id="mobile-strains-button" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300 flex items-center space-x-2">
+                        <span>Strains</span>
+                        <svg class="w-4 h-4 text-gray-800 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="mobile-strains-dropdown" class="mt-2 pl-4 hidden">
+                        <!-- Link for Bacillus Clausii -->
+                        <a href="/strains.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 transition duration-300">Bacillus Clausii</a>
+                    </div>
+                </div>
+    
+                <a href="/research.html" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">Research</a>
+                <a href="/contact.html" class="text-lg text-gray-800 hover:text-blue-500 transition duration-300">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- JavaScript for Mobile Menu and Dropdown Behavior -->
+    <script>
+        // Toggle mobile menu visibility
+        document.getElementById('hamburger').addEventListener('click', function () {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    
+        // Toggle the "Strains" dropdown on mobile
+        document.getElementById('mobile-strains-button').addEventListener('click', function () {
+            const mobileDropdown = document.getElementById('mobile-strains-dropdown');
+            mobileDropdown.classList.toggle('hidden');
+        });
+    
+        // Desktop hover dropdown behavior with improved user interaction
+        const strainsButton = document.querySelector('.group > button');
+        const strainsDropdown = document.querySelector('.group > .mt-2');
+    
+        // Open the dropdown when hovering over the button
+        strainsButton.addEventListener('mouseenter', () => {
+            strainsDropdown.classList.remove('hidden');
+        });
+    
+        // Keep the dropdown open when hovering over the dropdown menu itself
+        strainsDropdown.addEventListener('mouseenter', () => {
+            strainsDropdown.classList.remove('hidden');
+        });
+    
+        // Close the dropdown when the cursor leaves both the button and the dropdown
+        strainsButton.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                if (!strainsDropdown.matches(':hover') && !strainsButton.matches(':hover')) {
+                    strainsDropdown.classList.add('hidden');
+                }
+            }, 200); // Delay closing the dropdown to allow hover transition
+        });
+    
+        strainsDropdown.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                if (!strainsDropdown.matches(':hover') && !strainsButton.matches(':hover')) {
+                    strainsDropdown.classList.add('hidden');
+                }
+            }, 200); // Delay closing the dropdown to allow hover transition
+        });
+    </script>
+<main>
+    <!-- Banner Section -->
+    <section class="relative w-full h-[500px] lg:h-[600px]">
+        <!-- Banner Image -->
+        <img src="assets/strains.jpg" alt="Banner" class="w-full h-full object-cover">
+
+        <!-- Overlay for Text Visibility -->
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+
+        <!-- Text on Top of Banner -->
+        <div class="absolute inset-0 flex justify-center items-center text-center text-white">
+            <div>
+                <h1 class="text-3xl lg:text-5xl font-extrabold">Bacillus Clausii</h1>
+                <p class="mt-4 text-lg lg:text-xl">Discover our innovative solutions for your health and wellness journey.</p>
+                <a href="/contact.html" class="mt-6 inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+<!-- 4 Columns Section -->
+<section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-6">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-semibold text-gray-800">Our Key Metrics</h2>
+            <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">These are some of the key numbers that drive our innovations and success.</p>
+        </div>
+
+        <!-- Key Metrics Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Column 1 -->
+            <div class="p-6 text-center bg-white rounded-lg border border-gray-200">
+                <div class="text-4xl font-bold text-blue-600 mb-2 number" data-number="100">0</div>
+                <p class="text-gray-700 text-lg">Strains in Our Collection</p>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="p-6 text-center bg-white rounded-lg border border-gray-200">
+                <div class="text-4xl font-bold text-blue-600 mb-2 number" data-number="50">0</div>
+                <p class="text-gray-700 text-lg">Successful Clinical Trials</p>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="p-6 text-center bg-white rounded-lg border border-gray-200">
+                <div class="text-4xl font-bold text-blue-600 mb-2 number" data-number="30">0</div>
+                <p class="text-gray-700 text-lg">Countries Served</p>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="p-6 text-center bg-white rounded-lg border border-gray-200">
+                <div class="text-4xl font-bold text-blue-600 mb-2 number" data-number="500">0</div>
+                <p class="text-gray-700 text-lg">Happy Customers</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits of Bacillus clausii UBBC-07® for Manufacturing Companies Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-extrabold text-gray-800">Benefits of Bacillus clausii UBBC-07® for Manufacturing Companies</h2>
+            <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">
+                Bacillus clausii UBBC-07® is a powerful probiotic strain that offers numerous advantages for manufacturing companies. Below are some key benefits that make it a superior choice for various industries.
+            </p>
+        </div>
+
+        <!-- Benefits Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Benefit 1: Survivability -->
+            <div class="bg-blue-50 p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Survivability</h3>
+                <p class="text-gray-600">
+                    Bacillus clausii UBBC-07® is extremely resilient, maintaining its potency even under harsh conditions such as high heat, extreme pH levels, and pressure. This ensures that the probiotic remains active and effective from production to final use.
+                </p>
+            </div>
+
+            <!-- Benefit 2: No Microencapsulation -->
+            <div class="bg-blue-50 p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">No Microencapsulation</h3>
+                <p class="text-gray-600">
+                    Unlike many probiotics, Bacillus clausii UBBC-07® does not require microencapsulation for protection. This simplifies the manufacturing process, reduces costs, and ensures that the probiotic remains effective without additional processing steps.
+                </p>
+            </div>
+
+            <!-- Benefit 3: Resilience -->
+            <div class="bg-blue-50 p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Resilience</h3>
+                <p class="text-gray-600">
+                    Bacillus clausii UBBC-07® is known for its high resilience, surviving environmental stressors such as freezing, drying, and fluctuating temperatures. This ensures it remains viable during manufacturing, transport, and storage.
+                </p>
+            </div>
+
+            <!-- Benefit 4: Safe -->
+            <div class="bg-blue-50 p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Safe</h3>
+                <p class="text-gray-600">
+                    Bacillus clausii UBBC-07® has a long history of safe use in food and pharmaceutical applications. It is non-toxic and poses no significant risk to human health, making it an ideal ingredient for a wide range of products.
+                </p>
+            </div>
+
+            <!-- Benefit 5: Viability -->
+            <div class="bg-blue-50 p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Viability</h3>
+                <p class="text-gray-600">
+                    Bacillus clausii UBBC-07® maintains its viability even in long-term storage conditions without the need for refrigeration. This makes it highly flexible in manufacturing and logistics, reducing storage-related challenges.
+                </p>
+            </div>
+
+            <!-- Benefit 6: Temperature Resistant -->
+            <div class="bg-blue-50 p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Temperature Resistant</h3>
+                <p class="text-gray-600">
+                    Bacillus clausii UBBC-07® can withstand extreme temperature changes, from freezing to high heat, without losing efficacy. This makes it ideal for manufacturing processes that involve variable temperatures.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bacillus clausii UBBC-07® Overview Section -->
+<!-- Bacillus clausii UBBC-07® Overview Section -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0">
+        
+        <!-- Image on Left -->
+        <div class="lg:w-1/2 mb-8 lg:mb-0">
+            <img src="assets/strain1.jpeg" alt="Bacillus clausii UBBC-07®" class="w-full h-auto rounded-xl shadow-xl transition-transform transform hover:scale-105 ease-in-out duration-300">
+        </div>
+
+        <!-- Text on Right -->
+        <div class="lg:w-1/2 text-center lg:text-left lg:pl-12">
+            <h2 class="text-3xl lg:text-4xl font-extrabold text-gray-800 mb-4">What is Bacillus clausii UBBC-07®?</h2>
+            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                <b>Bacillus clausii UBBC-07®</b> is a robust and highly resilient probiotic strain, offering numerous benefits across diverse industries such as pharmaceuticals, food, and agriculture. Its ability to survive harsh environmental conditions makes it one of the most reliable probiotics for enhancing gut health and improving product performance.
+            </p>
+            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                Unlike other probiotics, Bacillus clausii UBBC-07® does not require microencapsulation, which makes it a cost-effective solution for manufacturers. With excellent heat resistance, pH fluctuation tolerance, and unmatched survivability, it's the ideal choice for dietary supplements, functional foods, animal feed, and agricultural products.
+            </p>
+            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                Bacillus clausii UBBC-07® also plays a vital role in supporting digestive health by balancing the beneficial bacteria in the gut. Its immune-boosting properties and overall health benefits make it a trusted ingredient for manufacturers focused on safe, effective, and high-quality health products.
+            </p>
+            <a href="/contact.html" class="inline-block px-8 py-4 bg-blue-600 text-white font-semibold rounded-full shadow-md hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                Contact Us
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features of Bacillus clausii UBBC-07® Section -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center">
+        <!-- Section Header on Left -->
+        <div class="lg:w-1/2 mb-8 lg:mb-0">
+            <h2 class="text-3xl lg:text-4xl font-extrabold text-gray-800 tracking-tight">Features of Bacillus clausii UBBC-07®</h2>
+            <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">The unique features that make Bacillus clausii UBBC-07® a reliable choice for health and manufacturing industries.</p>
+        </div>
+
+        <!-- Features List on Right -->
+        <div class="lg:w-1/2">
+            <div class="space-y-6">
+                <!-- Feature 1 -->
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12l5 5L19 7" />
+                    </svg>
+                    <span class="text-lg">Compatible with all product forms: liquids, solids, powders, and semi-solids.</span>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12l5 5L19 7" />
+                    </svg>
+                    <span class="text-lg">Does not alter sensory properties (taste, texture, etc.) of products.</span>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12l5 5L19 7" />
+                    </svg>
+                    <span class="text-lg">Can be used in food, beverage, and supplement formulations.</span>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12l5 5L19 7" />
+                    </svg>
+                    <span class="text-lg">Resilient to harsh manufacturing conditions: temperature, shear, and pasteurization.</span>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12l5 5L19 7" />
+                    </svg>
+                    <span class="text-lg">Antibiotic-resistant with long-term spore viability.</span>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="flex items-center text-gray-600">
+                    <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12l5 5L19 7" />
+                    </svg>
+                    <span class="text-lg">Easy incorporation into diverse health products.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Services Section -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-800 tracking-tight">Our Services</h2>
+            <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">We offer a variety of high-quality services tailored to meet the needs of our clients. From customized blends to private labeling, we provide full-spectrum support.</p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!-- Service 1: Customized Blends -->
+            <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center transition transform hover:scale-105 hover:shadow-xl">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Customized Blends</h3>
+                <p class="text-gray-600">We specialize in formulating customized blends that align with your unique requirements, ensuring maximum effectiveness and quality.</p>
+            </div>
+
+            <!-- Service 2: Analytical Support -->
+            <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center transition transform hover:scale-105 hover:shadow-xl">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Analytical Support</h3>
+                <p class="text-gray-600">We provide comprehensive analytical support to ensure your products meet industry standards, with accurate testing and results.</p>
+            </div>
+
+            <!-- Service 3: Private Label -->
+            <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center transition transform hover:scale-105 hover:shadow-xl">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Private Label</h3>
+                <p class="text-gray-600">We offer private label services for businesses that want to market high-quality products under their own brand name.</p>
+            </div>
+
+            <!-- Service 4: Contract Manufacturing -->
+            <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center transition transform hover:scale-105 hover:shadow-xl">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Contract Manufacturing</h3>
+                <p class="text-gray-600">We offer contract manufacturing services, handling everything from production to packaging with the utmost efficiency and reliability.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+</main>
+
+
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-6 lg:px-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- Company Information -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Aarmed Pharmacy</h3>
+                <p class="text-gray-400 text-sm">
+                    Providing trusted health solutions and premium probiotic products to support your wellness.
+                </p>
+                <div class="mt-4">
+                    <p class="text-gray-400 text-sm">© 2024 Aarmed Pharmacy. All rights reserved.</p>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="/" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                    <li><a href="/about.html" class="text-gray-400 hover:text-white transition duration-300">About</a></li>
+                    <li><a href="/products.html" class="text-gray-400 hover:text-white transition duration-300">Products</a></li>
+                    <li><a href="/research.html" class="text-gray-400 hover:text-white transition duration-300">Research</a></li>
+                    <li><a href="/contact.html" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Information -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                <ul class="space-y-2">
+                    <li class="text-gray-400 text-sm">Phone: <a href="tel:+1234567890" class="hover:text-white">+1 234 567 890</a></li>
+                    <li class="text-gray-400 text-sm">Email: <a href="mailto:info@aarmedpharmacy.com" class="hover:text-white">info@aarmedpharmacy.com</a></li>
+                    <li class="text-gray-400 text-sm">Address: 123 Wellness St, Health City, Country</li>
+                </ul>
+            </div>
+
+            <!-- Social Media -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.4c-5.3 0-9.6 4.3-9.6 9.6 0 4.3 2.8 8.1 6.7 9.5v-6.7h-2v-2.7h2v-2.1c0-2.7 1.5-4.2 3.9-4.2 1.1 0 2.3 0.1 2.3 0.1v2.5h-1.3c-1.3 0-1.7 0.8-1.7 1.6v1.9h2.7l-0.5 2.7h-2.2v6.7c3.9-1.4 6.7-5.2 6.7-9.5 0-5.3-4.3-9.6-9.6-9.6z"></path></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M24 2.7c-0.9 0.4-1.8 0.7-2.7 0.8 1-0.6 1.7-1.5 2.1-2.6-1 0.6-2.1 1-3.3 1.3-1.1-1.2-2.6-2-4.3-2-3.3 0-6 2.7-6 6 0 0.5 0.1 1.1 0.2 1.6-5-0.2-9.4-2.7-12.4-6.4-0.5 0.9-0.8 1.9-0.8 3 0 2 1 3.7 2.6 4.7-0.9-0.1-1.7-0.3-2.5-0.7v0.1c0 2.9 2.1 5.3 4.9 5.8-0.5 0.1-1 0.2-1.5 0.2-0.4 0-0.9 0-1.3-0.1 0.9 2.7 3.5 4.6 6.5 4.6 7.8 0 12.1-6.5 12.1-12.1 0-0.2 0-0.3 0-0.5 0.8-0.5 1.5-1.1 2.1-1.8z"></path></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.2c-5.4 0-9.8 4.3-9.8 9.8 0 4.9 3.6 9 8.4 9.7v-6.9h-2v-2.8h2v-2.1c0-2.1 1.2-3.2 3.1-3.2 0.9 0 1.9 0.2 1.9 0.2v2.4h-1.1c-1.2 0-1.5 0.7-1.5 1.5v1.8h2.5l-0.3 2.7h-2.2v6.9c4.8-0.7 8.4-4.8 8.4-9.7 0-5.4-4.4-9.8-9.8-9.8z"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="mt-8 border-t border-gray-700 pt-4 text-center text-gray-400 text-sm">
+            <p>&copy; 2024 Aarmed Pharmacy. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+    <!-- JavaScript for Number Animation with + Sign -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const numbers = document.querySelectorAll('.number');
+            
+            numbers.forEach(function (numberElement) {
+                const targetNumber = numberElement.getAttribute('data-number');
+                let currentNumber = 0;
+                const increment = Math.ceil(targetNumber / 100);  // Increment value for smooth animation
+    
+                function animateNumber() {
+                    if (currentNumber < targetNumber) {
+                        currentNumber += increment;
+                        numberElement.textContent = currentNumber > targetNumber ? targetNumber : currentNumber + "+";  // Add + sign after number
+                        requestAnimationFrame(animateNumber);
+                    } else {
+                        numberElement.textContent = targetNumber + "+";  // Add + sign after number
+                    }
+                }
+    
+                animateNumber();
+            });
+        });
+    </script>
+</html>
